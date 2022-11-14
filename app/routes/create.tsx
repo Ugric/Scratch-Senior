@@ -127,20 +127,48 @@ declare class canvas {
 }`;
 
 const defaultcode = `let framenum: i32 = 0
+let pos = [0, 0]
+let res = [0, 0]
 
 export function init(): void {
-    cls()
+    canvas.cls()
+    res = canvas.getResolution()
+    pos = [res[0] / 2, res[1] / 2]
 }
 
 export function frame(): void {
-    const x1: i32 = (Math.random() * 500) as i32;
-    const y1: i32 = (Math.random() * 500) as i32;
-    const x2: i32 = (Math.random() * 500) as i32;
-    const y2: i32 = (Math.random() * 500) as i32;
-    // code here
-    console.log(\`(\${x1}, \${y1}) to (\${x2}, \${y2})\`)
-    drawline(x1,y1,x2,y2)
+    canvas.cls()
+    const keys = getkeys()
+    if (keys.includes('ArrowUp')) {
+        console.log('up')
+        pos[1]--
+    }
+    if (keys.includes('ArrowDown')) {
+        console.log('down')
+        pos[1]++
+    }
+    if (keys.includes('ArrowLeft')) {
+        console.log('left')
+        pos[0]--
+    }
+    if (keys.includes('ArrowRight')) {
+        console.log('right')
+        pos[0]++
+    }
+    if (pos[0]<0) {
+        pos[0] = 0
+    } else if (pos[0]>res[0]) {
+        pos[0] = res[0]
+    }
+    if (pos[1]<0) {
+        pos[1] = 0
+    } else if (pos[1]>res[1]) {
+        pos[1] = res[1]
+    }
+    canvas.drawline(res[0] / 2, 0, pos[0], pos[1], 'green')
+    canvas.drawcircle(pos[0], pos[1], Math.min(pos[1] as f64, Math.min(pos[0] as f64, Math.min(res[1]-pos[1], res[0]-pos[0]))) as i32, 'red', false)
     framenum++
+    console.log(\`frame: \${framenum}\`)
 }
 `;
 

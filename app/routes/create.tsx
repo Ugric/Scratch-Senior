@@ -480,7 +480,25 @@ export default function Index() {
                               }
                             : codeid.current != compiled.current?.codeid
                             ? compile
-                            : run
+                            : async () => {
+                                  try {
+                                      await run();
+                                  } catch (e) {
+                                      console.error(e);
+                                      setoutput((outputs) =>
+                                          outputs.concat(
+                                              <ConsoleLine
+                                                  color={"red"}
+                                                  key={outputs.length}
+                                              >
+                                                  {String(e)}
+                                              </ConsoleLine>
+                                          )
+                                      );
+                                      runtime.current = null;
+                                      setrunning(false);
+                                  }
+                              }
                     }
                 >
                     {running ? "Stop" : "Run"}

@@ -8,7 +8,7 @@
     "module": "es2022",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "target": "ES2019",
+    "target": "ES3",
     "strict": true,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,

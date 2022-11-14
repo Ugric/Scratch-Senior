@@ -126,51 +126,20 @@ declare class canvas {
                                         width: i32 = 1): void
 }`;
 
-const defaultcode = `let framenum: i32 = 0
-let pos = [0, 0]
-let res = [0, 0]
-
-export function init(): void {
-    canvas.cls()
-    res = canvas.getResolution()
-    pos = [res[0] / 2, res[1] / 2]
+const defaultcode = `export function init(): void {
 }
 
 export function frame(): void {
-    canvas.cls()
-    const keys = getkeys()
-    if (keys.includes('ArrowUp')) {
-        console.log('up')
-        pos[1]--
-    }
-    if (keys.includes('ArrowDown')) {
-        console.log('down')
-        pos[1]++
-    }
-    if (keys.includes('ArrowLeft')) {
-        console.log('left')
-        pos[0]--
-    }
-    if (keys.includes('ArrowRight')) {
-        console.log('right')
-        pos[0]++
-    }
-    if (pos[0]<0) {
-        pos[0] = 0
-    } else if (pos[0]>res[0]) {
-        pos[0] = res[0]
-    }
-    if (pos[1]<0) {
-        pos[1] = 0
-    } else if (pos[1]>res[1]) {
-        pos[1] = res[1]
-    }
-    canvas.drawline(res[0] / 2, 0, pos[0], pos[1], 'green')
-    canvas.drawcircle(pos[0], pos[1], Math.min(pos[1] as f64, Math.min(pos[0] as f64, Math.min(res[1]-pos[1], res[0]-pos[0]))) as i32, 'red', false)
-    framenum++
-    console.log(\`frame: \${framenum}\`)
 }
-`;
+
+export function keydown(key: string): void {
+}
+
+export function keyup(key: string): void {
+}
+
+export function stop(): void {
+}`;
 
 type runtime = {
     frame?: () => void;

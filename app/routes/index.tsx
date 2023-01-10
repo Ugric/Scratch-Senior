@@ -298,9 +298,10 @@ export default function Index() {
                                 ctxref.current.strokeStyle = color;
                                 ctxref.current.fillStyle = color;
                                 if (fill) {
-                                    return ctxref.current.fill();
+                                    ctxref.current.fill();
+                                } else {
+                                    ctxref.current.stroke();
                                 }
-                                ctxref.current.stroke();
                                 ctxref.current.lineWidth = 0;
                                 ctxref.current.strokeStyle = "";
                                 ctxref.current.fillStyle = "";

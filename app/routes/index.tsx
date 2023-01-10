@@ -238,7 +238,6 @@ export default function Index() {
                                     ctxref.current.canvas.width,
                                     ctxref.current.canvas.height
                                 );
-                            return "hello";
                         },
                         getResolution(): [number, number] {
                             return [
@@ -259,13 +258,14 @@ export default function Index() {
                                 ctxref.current.beginPath();
                                 console.log(fill);
                                 if (fill) {
+                                    ctxref.current.fillStyle = color;
                                     ctxref.current.fillRect(
                                         x,
                                         y,
                                         width,
                                         height
                                     );
-                                    ctxref.current.fillStyle = color;
+                                    ctxref.current.fillStyle = "";
                                 } else {
                                     ctxref.current.strokeStyle = color;
                                     ctxref.current.lineWidth = lineWidth;
@@ -300,6 +300,9 @@ export default function Index() {
                                     return ctxref.current.fill();
                                 }
                                 ctxref.current.stroke();
+                                ctxref.current.lineWidth = 0;
+                                ctxref.current.strokeStyle = "";
+                                ctxref.current.fillStyle = "";
                             }
                         },
                         drawline(
@@ -317,6 +320,8 @@ export default function Index() {
                                 ctxref.current.moveTo(x1, y1);
                                 ctxref.current.lineTo(x2, y2);
                                 ctxref.current.stroke();
+                                ctxref.current.strokeStyle = "";
+                                ctxref.current.lineWidth = 0;
                             }
                         },
                     },

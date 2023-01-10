@@ -238,6 +238,7 @@ export default function Index() {
                                     ctxref.current.canvas.width,
                                     ctxref.current.canvas.height
                                 );
+                            return "";
                         },
                         getResolution(): [number, number] {
                             return [
